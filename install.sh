@@ -66,16 +66,15 @@ zplug "plugins/encode64", from:oh-my-zsh
 zplug 'plugins/extract', from:oh-my-zsh
 zplug "themes/half-life", from:oh-my-zsh, as:theme
 
-# git/docker
+# git/php/npm
 # zplug 'plugins/git', from:oh-my-zsh
+# zplug 'plugins/composer', from:oh-my-zsh
+# zplug 'plugins/npm', from:oh-my-zsh
+
+# docker
+zplug "tcnksm/docker-alias", use:zshrc
 zplug 'plugins/docker', from:oh-my-zsh
 zplug 'plugins/docker-compose', from:oh-my-zsh
-
-# php
-# zplug 'plugins/composer', from:oh-my-zsh
-
-# npm
-# zplug 'plugins/npm', from:oh-my-zsh
 
 # systemd
 zplug 'plugins/systemd', from:oh-my-zsh
