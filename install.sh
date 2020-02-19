@@ -1,58 +1,39 @@
 #!/bin/bash
+# https://guojing.io
+# https://github.com/jotyGill/quickz-sh
 
 COMMANDS="wget zsh git"
-OS_CENTOS='centos'
-OS_UBUNTU='ubuntu'
-OSNAME=`grep '^ID=' /etc/os-release | awk -F'"' '{print $2}'`
-
 ZSHELL=`grep zsh /etc/shells`
 MYNAME=`whoami`
 
-#=====================
-# check command
-#=====================
-
-function installCommand()
-{
-        if [[ ! -n $1 ]]; then
-                echo "install command faild"
-                exit 1
-        fi
-
-        case $OSNAME in
-        $OS_CENTOS)
-                sudo yum install -y $1
-        ;;
-        $OS_UBUNTU)
-                sudo apt install -y $1
-        ;;
-        *)
-                echo "other os"
-        esac
-}
-
-for CMD in $COMMANDS
-do
-        hash $CMD &>/dev/null
-        if [[ $? -ne 0 ]]
-        then
-                installCommand $CMD
-        fi
-        continue
-done
-
-#=====================
-# config zsh/zplug
-#=====================
-if [ -f ~/.zshrc ]; then
-  mkdir -p ~/zsh-config/ && cp ~/.zshrc ~/zsh-config/zshrc
+# install zsh/git/wget
+if command -v zsh &> /dev/null && command -v git &> /dev/null && command -v wget &> /dev/null; then
+        echo -e "ZSH and Git are already installed\n"
+else
+	if sudo apt install -y $COMMANDS || sudo dnf install -y $COMMANDS || sudo yum install -y $COMMANDS || sudo brew install $COMMANDS ; then
+		echo -e "ZSH and Git Installed\n"
+	else
+		echo -e "Can't install ZSH or Git\n" && exit
+	fi
 fi
+
+# config zsh/zplug
+if [ -f ~/.zshrc ]; then
+  echo -e "Backed up the current .zshrc to ~/zsh-config/zshrc-backup-date\n"
+  mkdir -p ~/zsh-config/ && cp ~/.zshrc ~/zsh-config/zshrc-backup-$(date +"%Y-%m-%d")
+fi
+
 if [ -d ~/.zplug ]; then 
+  echo -e "Backed up the current .zplug/ to ~/zsh-config/zplug\n"
   mkdir -p ~/zsh-config/ && mv ~/.zplug ~/zsh-config/zplug
 fi 
 
+
+echo -e "Installing zplug\n"
 export ZPLUG_HOME=~/.zplug
-git clone https://github.com/zplug/zplug $ZPLUG_HOME &> /dev/null
+if git clone https://github.com/zplug/zplug $ZPLUG_HOME ; then
+        echo -e "Installed zplug\n"
+fi
 
 cat > ~/.zshrc << EOF
 # Check if zplug is installed
@@ -142,9 +123,11 @@ fi
 zplug load
 EOF
 
-
-#=====================
-# switch zsh
-#=====================
-sudo usermod -s $ZSHELL $MYNAME
-$ZSHELL
+# source .zshrc
+echo -e "\nSudo access is needed to change default shell\n"
+if chsh -s $(which zsh) && /bin/zsh; then
+	echo -e "Installation Successful, exit terminal and enter a new session"
+else
+	echo -e "Something is wrong"
+fi
+exit
