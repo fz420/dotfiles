@@ -92,7 +92,7 @@ bindkey "\e[1;5C" forward-word
 bindkey  "^[[H"   beginning-of-line
 bindkey  "^[[F"   end-of-line
 
-# Zplug plugins
+# external plugins
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-syntax-highlighting"
@@ -100,26 +100,20 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
 zplug "supercrabtree/k"
 zplug "b4b4r07/enhancd", use:init.sh
+zplug "tcnksm/docker-alias", use:zshrc
+zplug "themes/half-life", from:oh-my-zsh, as:theme
+
+# oh-my-zsh plugins
 zplug "lib/completion", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/man", from:oh-my-zsh
 zplug "plugins/sudo", from:oh-my-zsh
 zplug "plugins/encode64", from:oh-my-zsh
 zplug 'plugins/extract', from:oh-my-zsh
-zplug "themes/half-life", from:oh-my-zsh, as:theme
-# docker
-zplug "tcnksm/docker-alias", use:zshrc
 zplug 'plugins/docker', from:oh-my-zsh
 zplug 'plugins/docker-compose', from:oh-my-zsh
-# systemd
 zplug 'plugins/systemd', from:oh-my-zsh
-# z 
 zplug 'plugins/z', from:oh-my-zsh
-
-# git/php/npm
-# zplug 'plugins/git', from:oh-my-zsh
-# zplug 'plugins/composer', from:oh-my-zsh
-# zplug 'plugins/npm', from:oh-my-zsh
 
 zplug "junegunn/fzf"
 zplug "junegunn/fzf-bin", \
@@ -134,7 +128,7 @@ if zplug check b4b4r07/enhancd; then
     export ENHANCD_FILTER=fzf-tmux
 fi
 
-# Install packages that have not been installed yet
+# Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
@@ -143,6 +137,8 @@ if ! zplug check --verbose; then
         echo
     fi
 fi
+
+# Then, source plugins and add commands to $PATH
 zplug load
 EOF
 
