@@ -98,7 +98,7 @@ zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
-zplug "rimraf/k"
+zplug "supercrabtree/k"
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "lib/completion", from:oh-my-zsh
 zplug "plugins/colored-man-pages", from:oh-my-zsh
