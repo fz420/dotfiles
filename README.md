@@ -5,13 +5,19 @@
 
 ## 安装
 
-### 下载
+### 自动安装
+```shell
+curl -fsSL https://git.io/JvBIq | bash
 ```
+
+### 手动安装
+#### 下载
+```shell
 $ git clone https://github.com/fz420/dotfiles.git
 ```
 
-### 安装
-```
+#### 安装
+```shell
 $ chmod +x dotfiles/install.sh
 
 $ ./dotfiles/install.sh
