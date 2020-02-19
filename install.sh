@@ -5,6 +5,9 @@ OS_CENTOS='centos'
 OS_UBUNTU='ubuntu'
 OSNAME=`grep '^ID=' /etc/os-release | awk -F'"' '{print $2}'`
 
+ZSHELL=`grep zsh /etc/shells`
+MYNAME=`whoami`
+
 #=====================
 # check command
 #=====================
@@ -142,3 +145,10 @@ if ! zplug check --verbose; then
 fi
 zplug load
 EOF
+
+
+#=====================
+# switch zsh
+#=====================
+sudo usermod -s $ZSHELL $MYNAME
+$ZSHELL
