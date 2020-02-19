@@ -1,5 +1,46 @@
 #!/bin/bash
-#
+
+COMMANDS="wget zsh git"
+OS_CENTOS='centos'
+OS_UBUNTU='ubuntu'
+OSNAME=`grep '^ID=' /etc/os-release | awk -F'"' '{print $2}'`
+
+#=====================
+# check command
+#=====================
+
+function installCommand()
+{
+        if [[ ! -n $1 ]]; then
+                echo "install command faild"
+                exit 1
+        fi
+
+        case $OSNAME in
+        $OS_CENTOS)
+                sudo yum install -y $1
+        ;;
+        $OS_UBUNTU)
+                sudo apt install -y $1
+        ;;
+        *)
+                echo "other os"
+        esac
+}
+
+for CMD in $COMMANDS
+do
+        hash $CMD &>/dev/null
+        if [[ $? -ne 0 ]]
+        then
+                installCommand $CMD
+        fi
+        continue
+done
+
+#=====================
+# config zsh/zplug
+#=====================
 if [ -f ~/.zshrc ]; then
   mkdir -p ~/zsh-config/ && cp ~/.zshrc ~/zsh-config/zshrc
 fi
