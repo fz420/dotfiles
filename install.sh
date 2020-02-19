@@ -81,7 +81,6 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zplug/zplug", hook-build:'zplug --self-manage'
 zplug "supercrabtree/k"
 zplug "b4b4r07/enhancd", use:init.sh
-zplug "tcnksm/docker-alias", use:zshrc
 zplug "themes/half-life", from:oh-my-zsh, as:theme
 
 # oh-my-zsh plugins
