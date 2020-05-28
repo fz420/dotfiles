@@ -82,7 +82,11 @@ zplug "zplug/zplug", hook-build:'zplug --self-manage'
 zplug "supercrabtree/k"
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "themes/half-life", from:oh-my-zsh, as:theme
-zplug "djui/alias-tips"
+zplug sei40kr/fast-alias-tips-bin, from:gh-r, as:command, rename-to:def-matcher
+zplug sei40kr/zsh-fast-alias-tips
+
+
+
 
 # oh-my-zsh plugins
 zplug "lib/completion", from:oh-my-zsh
@@ -125,6 +129,20 @@ alias ll="ls -l --color=auto"
 alias la="ll -a"
 alias ld="ll -d"
 alias c="clear"
+
+# https://githowto.com/aliases
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias gco='git checkout '
+alias gk='gitk --all&'
+alias gx='gitx --all'
+
+alias got='git '
+alias get='git '
+
 
 # Then, source plugins and add commands to $PATH
 zplug load
