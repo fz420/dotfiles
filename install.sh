@@ -121,7 +121,9 @@ fi
 
 # :: Aliases and functions
 alias l="ls"
-alias ll="ls -al"
+alias ll="ls -l --color=auto"
+alias la="ll -a"
+alias ld="ll -d"
 alias c="clear"
 
 # Then, source plugins and add commands to $PATH
