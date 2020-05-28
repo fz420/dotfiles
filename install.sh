@@ -118,6 +118,11 @@ if ! zplug check --verbose; then
     fi
 fi
 
+# :: Aliases and functions
+alias l="ls"
+alias ll="ls -al"
+alias c="clear"
+
 # Then, source plugins and add commands to $PATH
 zplug load
 EOF
