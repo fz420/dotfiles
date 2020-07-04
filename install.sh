@@ -82,11 +82,6 @@ zplug "zplug/zplug", hook-build:'zplug --self-manage'
 zplug "supercrabtree/k"
 zplug "b4b4r07/enhancd", use:init.sh
 zplug "themes/half-life", from:oh-my-zsh, as:theme
-zplug sei40kr/fast-alias-tips-bin, from:gh-r, as:command, rename-to:def-matcher
-zplug sei40kr/zsh-fast-alias-tips
-
-
-
 
 # oh-my-zsh plugins
 zplug "lib/completion", from:oh-my-zsh
